@@ -1,0 +1,25 @@
+class HelloWorld {
+    public static void main(String[] args) {
+          employee newEmp = new employee();
+    newEmp.name = "John";
+    newEmp.expYears = 10;
+    process(newEmp);
+     newEmp.name = "Gerrald";
+      newEmp.expYears = 14;
+       process(newEmp);
+         newEmp.name = "dominic";
+         newEmp.expYears = 11;
+         process(newEmp);
+           newEmp.name = "olivia";
+              newEmp.expYears = 24;
+               process(newEmp);
+    }
+    static void  process(employee obj){
+        System.out.println(obj.name + " "+ obj.expYears);
+       
+    }
+}
+class employee {
+    String name;
+    int expYears;
+}
