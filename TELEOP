@@ -1,0 +1,169 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.PIDCoefficients;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+
+@TeleOp
+
+public class Telemetry extends LinearOpMode{
+    double integral = 0;
+    double repetitions = 0;
+    
+    PIDCoefficients testPID = new PIDCoefficients(0,0,0);
+    
+    ElapsedTime PIDTimer = new ElapsedTime();
+
+    
+    private DcMotor ra, la, lift, forearm;
+   // private DcMotor armMotor;
+
+    private int armTarget = 0;
+    
+    @Override
+    public void runOpMode() {
+        
+
+    forearm = hardwareMap.get(DcMotor.class, "forearm");
+   lift = hardwareMap.get(DcMotor.class, "lift");
+       ra = hardwareMap.get(DcMotor.class, "rightarm");
+    la = hardwareMap.get(DcMotor.class, "leftarm");
+
+
+   la.setDirection(DcMotor.Direction.REVERSE);
+    ra.setDirection(DcMotor.Direction.REVERSE);
+       //forearm.setDirection(DcMotor.Direction.REVERSE);
+
+     ra.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+     lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+     forearm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+     la.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); // Enable brake mode
+     
+     la.setPower(0);
+     ra.setPower(0);
+     forearm.setPower(0);
+     
+     ra.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+     la.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+     forearm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+// Enable brake mode
+     ra.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+     la.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+     forearm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    // lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        // armMotor.setTargetPosition(0);
+        // armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION); 
+    //testMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODERS); 
+        //armMotor.setTargetPosition(0);
+        
+        //resetEncoders();
+         waitForStart();
+      
+
+        while (opModeIsActive()) {
+            
+        if(gamepad1.a){
+            armTarget = 75;
+            //la.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            la.setTargetPosition(armTarget);
+            la.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            la.setPower(1);
+            //la.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //ra.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            ra.setTargetPosition(armTarget);
+            ra.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            ra.setPower(1);
+           // ra.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            forearm.setTargetPosition(-590);
+            forearm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            forearm.setPower(1);
+            //forearm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
+        
+        if(gamepad1.x){
+            armTarget = 790;
+            //la.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            la.setTargetPosition(armTarget);
+            la.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            la.setPower(1);
+            //la.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //ra.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            ra.setTargetPosition(armTarget);
+            ra.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            ra.setPower(1);
+           // ra.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            forearm.setTargetPosition(-590);
+            forearm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            forearm.setPower(1);
+            //forearm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
+     
+        if(gamepad1.y && gamepad1.b){
+            System.out.println("the code works");
+
+            /*armTarget = 1118;
+            //la.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            la.setTargetPosition(armTarget);
+            la.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            la.setPower(1);
+            //la.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //ra.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            ra.setTargetPosition(armTarget);
+            ra.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            ra.setPower(1);
+           // ra.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            forearm.setTargetPosition(-660);
+            forearm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            forearm.setPower(1);
+            //forearm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
+            
+        }
+        if(gamepad1.b){
+            la.setPower(0);
+            ra.setPower(0);
+            forearm.setPower(0);
+            forearm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            forearm.setPower(0.3);*/
+            
+                telemetry.addData("forearm position: ", forearm.getCurrentPosition());
+                telemetry.addData("forearm power: ", forearm.getPower());
+                telemetry.update();
+            //MoveTestMotor(200);
+        }
+       
+         telemetry.addData("Right Arm", ra.getCurrentPosition());
+         telemetry.addData("Left Arm", la.getCurrentPosition());
+         telemetry.addData("Lift", lift.getCurrentPosition());
+         telemetry.addData("ForeArm", forearm.getCurrentPosition());
+         telemetry.addData("forearm power: ", forearm.getPower());
+        telemetry.addData("target", armTarget);
+
+         telemetry.update();
+           
+        }
+
+}
+
+    void moveForArm(double power, double ticks){
+        while(forearm.getCurrentPosition() < ticks && opModeIsActive()){
+            forearm.setPower(power);
+        }
+      resetEncoders(); 
+     
+    }
+   
+    void resetEncoders(){
+        forearm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        forearm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+}
+
+
+   
+    
+ 
+
+
