@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter student's name:");
+        String name = scanner.nextLine();
+
+        double total = 0;
+        for (int i = 1; i <= 3; i++) {
+            System.out.print("Enter score for Test " + i + ": ");
+            double score = scanner.nextDouble();
+            total += score;
+        }
+
+        double average = total / 3;
+        System.out.println("\nStudent: " + name);
+        System.out.printf("Average Score: %.2f\n", average);
+        System.out.println("Result: " + (average >= 60 ? "PASS" : "FAIL"));
+    }
+}
